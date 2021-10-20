@@ -1,6 +1,7 @@
 # NBA Rookie Career PER Prediction
 
 ## Access
+
 View the notebooks online:
 [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.org/github/kevin-goetz/NBA-ML-Projects/tree/main/Player%20Performance%20Prediction/Notebooks/)
 
@@ -9,7 +10,7 @@ Excecute the notebooks online:
 
 This can take some time if the binder environment needs to be rebuilt (navigate from the parent folder to the projects notebooks).
  
-Execute the notebooks offline:
+### Requirements:
 
 For the Notebooks two different virtual environments (venv) had to be set up because PyCaret only runs with a different version of Python and scikit-learn (older ones) compared to the newer versions that were used for the rest of the project. If you don't want to run the "Modelling with Pycaret" - Notebook it's sufficient to work with only one venv and install the requirements.txt file.
 
