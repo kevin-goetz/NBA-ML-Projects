@@ -7,7 +7,10 @@ View the notebooks online:
 Excecute the notebooks online: 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kevin-goetz/NBA-ML-Projects/HEAD)
 
- This can take some time if the binder environment needs to be rebuilt (navigate from the parent folder to the projects notebooks).
+This can take some time if the binder environment needs to be rebuilt (navigate from the parent folder to the projects notebooks).
+ 
+Requirements:
+For the Notebooks two different virtual environments (venv) had to be set up because PyCaret only runs with a different version of Python and scikit-learn (older ones) compared to the newer versions that were used for the rest of the project. If you don't want to run the "Modelling with Pycaret" - Notebook it's sufficient to work with only one venv and install the requirements.txt file.
 
 ## Description
 
