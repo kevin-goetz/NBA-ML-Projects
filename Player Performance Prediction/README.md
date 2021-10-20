@@ -30,7 +30,19 @@ The data was then preprocessed and condensed with a PCA (Principal Component Ana
 For NBA teams and their managers it is very important to foresee the future performance and the potential of a player at an early stage. the project is intended to help support the experts' qualitative assessment with a quantitative analysis and prediction.
 
 ### Results & Impact
-....
+With an R2 of 0.44 the results are not too impactful, there is still a lot to learn about the factors of a successful career (discussion in "Outlook" below) and also how to model the data in an optimal way. The model overestimates untalented rookies and also understimates talented rookies regarding their career PER. The following error plot summarizes this:
+
+
+
+The table of the Top 5 rookies is to be taken with a grain of salt therefore:
+
+| namePlayer| numberPickOverall | Age | Tm | Pos | Rookie_PER | Predicted_Career_PER |
+|---:|---:|---:|---:|---:|---:|---|
+| LaMelo Ball | 3.0 | 19.0 | CHO | PG | 17.5 | 19.48 |
+| Isaiah Stewart | 16.0 | 19.0 | DET | C | 16.4 | 17.07 |
+| Onyeka Okongwu | 6.0 | 20.0 | ATL | C | 16.8 | 16.69 |
+| Tyrese Haliburton | 12.0 | 20.0 | SAC | PG | 16.2 | 16.32 |
+| Kenyon Martin Jr. | 52.0 | 20.0 | HOU | SF | 14.6 | 16.07 |
 
 ## The Machine Learning Pipeline
 
