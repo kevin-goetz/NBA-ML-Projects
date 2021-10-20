@@ -5,7 +5,7 @@
 ### Online
 
 View the notebooks online:
-[![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.org/github/kevin-goetz/NBA-ML-Projects/tree/main/Player%20Performance%20Prediction/Notebooks/)
+[![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.org/github/kevin-goetz/NBA-ML-Projects/tree/main/Player%20Performance%20Prediction/Notebooks/?flush_cache=true)
 
 Excecute the notebooks online: 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kevin-goetz/NBA-ML-Projects/HEAD)
@@ -24,10 +24,13 @@ Project on predicting (regression) a NBA rookie's career PER (Player Efficiency 
 ### How
 By collecting data from a [Database (Kaggle)](https://www.kaggle.com/wyattowalsh/basketball) with SQL and enriching this data with further performance metrics by web scraping the website ["basketball-reference.com"](https://www.basketball-reference.com) for each individual player on all the years the player was active in the NBA.
 
-The data was then preprocessed and condensed with a PCA (Principal Component Analysis) and an RFE (Recurive Feature Elimination) before 
+The data was then preprocessed and condensed with a PCA (Principal Component Analysis) and an RFE (Recurive Feature Elimination) before being modelled with a VotingRegressor (GradientBoostingRegressor & RandomForestRegressor) all in a ML Pipeline (see it below!) to avoid data leakage.
 
 ### Why
 For NBA teams and their managers it is very important to foresee the future performance and the potential of a player at an early stage. the project is intended to help support the experts' qualitative assessment with a quantitative analysis and prediction.
+
+### Results & Impact
+....
 
 ## The Machine Learning Pipeline
 
@@ -40,54 +43,22 @@ Here's a HTML representation of the ML pipeline to get an overview of the proces
 
 ## Skills
 Technical skills honed in this project are:
-- Batch-Wrangling of csv-files
-- Feature Engineering
-- Pandas Data Type Optimization
-- Understanding of Pandas & NumPy internals
-- Using different flat file types with faster I/O
+- Database Integration in a Python Script (SQL)
+- Web Scraping (Requests, BeautifulSoup)
+- Data Wrangling (Pandas, NumPy)
+- Data Visualization & EDA (pandas-profiling, Matplotlib, Seaborn, missingno, plotly, Yellowbrick)
+- Outlier Detection with Z-Scores, IQR and Isolation Forest (Pandas, NumPy, scikit-learn, Matplotlib, Plotly)
+- ML Pipelines (scikit-learn, PyCaret)
+- Encoding, Imputation & Scaling / Transforming (scikit-learn)
+- Feature Selection (RFE) & Dimensionality Reduction (PCA) (scikit-learn)
+- Hyperparametertuning (scikit-learn)
+- Ensemble Meta-Estimators (scikit-learn)
 
 ## Personal Learnings:
-This time the personal learnings can be summarized in a checklist for future projects:
-1. **Use the pd.read_csv() parameters**:
-  - **usecols**: read only the specified columns
-  - **nrows**: read only the rows needed
-  - **dtype**: if you already know the optimal data type for the columns, specify it with a dict
-  - **chunksize**: load the data as an iterator and preprocess/aggregate it in a loop, concatenating the results again
-
-2. **Choose correct data types**: <br/>
-**df.convert_dtypes()** is a really powerful method that converts the df into a df with correct data types. For example: There is a column that has a float64 data type, but it only holds numbers with .0, so it's basically all integers. This method corrects the column automatically to int64. Or Object data types that are actually strings. All this safes memory and it also brings another advantage: the new data types are pandas ExtensionDtype. This data type allows integer columns to have NA-values and not convert to float, like it used to be. With the [Pandas Version Update 1.3.0](https://pandas.pydata.org/docs/whatsnew/v1.3.0.html) from July 2021 those data types can be downcasted.
-
-3. **Downcast numeric values**: <br/>
-When pandas reads a csv it looks at the first few rows for each column and then guesses the data type (int, float, string, etc.). Since pandas doesn't know if the last value in this column exceeds any size (big numbers), it automatically upcasts to the biggest format (int64, float64, etc.) which is often not needed. You can use the **pd.to_numeric(downcast=str)** function to take care of this.
-
-4. **Use the categorical data type for low cardinality strings**: <br/>
-Often Strings are represented as objects in a pandas DataFrame, which itself can be a memory safer when transformed to strings. The problem with strings though is that they occupy a lot of space and are often frequently repeated in a column. This means the column has low cardinality and a more efficient data storage option are categories. Much like OrdinalEncoder in Scikit-learn, pandas safes a mapping for all the different strings internally and the rows get the corresponding number (internally). That way strings won't be repeated and memory is safed --> **df.astype('category')**
-
-5. **Use sparse arrays for low cardinality numbers**: <br/>
-Sparse data is data which contains mostly NaN / missing value, though any value can be chosen, including 0. On the contrary, A column in which the majority of elements are non zero is called dense. Convert to sparse with **df[column] = df[column].astype(pd.SparseDtype(df['FG'].dtype, pd.NA))** or directly use the parameter of pandas dummy function: **pd.get_dummies(data, sparse=True)**. Though this technique was not needed in this project, it could be an advantage in future projects with sparse data.
-
-6. **Using optimized I/O file formats**: <br/>
-A csv-file doesn't save any data types so it would be a pitty to loose all the work of optimizing a dataframe when saved to csv. There are more suitable file formats with faster I/O as well, like: pickle, hdf5, feather, parquet, etc. Just use pandas **df.to_feather(filepath, compression='lz4')**.
+....
 
 ## Outlook
-There is still one big disadvantage: The function is only applicable when the DataFrame is already loaded into RAM. So what if we need to optimize the data types before loading it into RAM because it doesn't fit in there yet? That's where chunking and saving the minimum and maximum of the column into a DataFrame comes in handy. One could then downcast this intermediate DataFrame and safe the optimized Data Types as a dictionary for the read_csv parameter "dtype: dict". Another opportunity could be a out-of-core library like [Vaex](https://vaex.io/docs/index.html) that makes use of memory-mapping and doesn't load all the data into RAM.
-
-Also sparse arrays weren't used in this project and could be an advantage in certain datasets with sparse data, e.g. tables for recommendation engines that have a lot of 1/0 data. This feature would exceed an acceptable function length and could be added in a future project for a custom module.
-
-
-## References
-**Downcasting and Categoricals**:
-- [Dataquest Blog](https://www.dataquest.io/blog/pandas-big-data/)
-- [Pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/scale.html#)
-
-**Sparse Data**:
-- [TDS Blog](https://towardsdatascience.com/working-with-sparse-data-sets-in-pandas-and-sklearn-d26c1cfbe067)
-
-**Optimal I/O Files**:
-- [TDS Blog](https://towardsdatascience.com/the-best-format-to-save-pandas-data-414dca023e0d)
-
-The **Dataset** is from Ken Huang: 
-- [Kaggle Profile](https://www.kaggle.com/kenhuang41/nba-basic-game-data-by-player)
+... more data bla bla
 
 
 ## 📫 Let's connect and learn from each other:
