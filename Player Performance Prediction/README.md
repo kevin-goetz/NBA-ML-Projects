@@ -19,21 +19,21 @@ For the Notebooks two different virtual environments (venv) had to be set up bec
 ## Description
 
 ### What
-Project on how to optimize the default pandas data types that are inferred when reading a csv-file. The result is a dataframe that takes up much less RAM without the loss of any information in the data.
+Project on predicting (regression) a NBA rookie's career PER (Player Efficiency Rating averaged over his whole career) by just looking at his first season stats.
 
 ### How
-By making use of the pd.read_csv parameters, downcasting the numerical values, and representing columns with low cardinality in a different way (categories for strings and sparse arrays for numbers). A detailed explanation of how is listed in my personal learnings below.
+By collecting data from a [Database (Kaggle)](https://www.kaggle.com/wyattowalsh/basketball) with SQL and enriching this data with further performance metrics by web scraping the website ["basketball-reference.com"](https://www.basketball-reference.com) for each individual player on all the years the player was active in the NBA.
+
+The data was then preprocessed and condensed with a PCA (Principal Component Analysis) and an RFE (Recurive Feature Elimination) before 
 
 ### Why
-Pandas provides data structures for in-memory analytics, which makes using pandas to analyze datasets that are larger than memory somewhat tricky. Even datasets that are a sizable fraction of memory become unwieldy, as some pandas operations need to make intermediate copies. With small data (under 100 megabytes), performance is rarely a problem. When we move to larger data (100 megabytes to multiple gigabytes), performance issues can make run times much longer, and cause code to fail entirely due to insufficient memory.
-
-That's what this Notebook is all about: How to shrink your pandas dataframe so it fit's your RAM better - without losing any information.
+For NBA teams and their managers it is very important to foresee the future performance and the potential of a player at an early stage. the project is intended to help support the experts' qualitative assessment with a quantitative analysis and prediction.
 
 ## The Machine Learning Pipeline
 
 Here's a HTML representation of the ML pipeline to get an overview of the process of preparing and modelling the data.
 
-  **--> Click on it to get the interactive HTML!**
+  **--> Click on it to get the interactive HTML for details!**
 
 [![raw.githack.com](https://github.com/kevin-goetz/NBA-ML-Projects/blob/main/Player%20Performance%20Prediction/Models/ML%20Pipeline.PNG)](https://rawcdn.githack.com/kevin-goetz/NBA-ML-Projects/9c439f9f4304749febc12af72782517efaa1d8ee/Player%20Performance%20Prediction/Models/NBA_Rookie_model_pipeline.html)
 
