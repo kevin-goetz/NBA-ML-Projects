@@ -67,7 +67,13 @@ Technical skills honed in this project are:
 - Ensemble Meta-Estimators (scikit-learn)
 
 ## Personal Learnings:
-....
+
+**1. Web Scraping is tricky**:<br/>
+Dealing with unstructured data from websites is always a hard job, especially when scraping thousands of different sites based on the structure of the URL. The most tricky      part is not getting the data, but deciding if the scraped data is indeed the correct data (or did the program scrape data from another players profile because they have the same name?). Also dealing with bot blocking or rate limits can make the process hard, but not impossible. A special kind of challenge is ne never ending encoding, representation, and handling of text with special characters (ASCII vs. Unicode etc.). I found the library "unidecode" to be easy and useful for those tasks.
+
+**2. ....**: <br/>
+
+
 
 ## Outlook
 ... more data bla bla
