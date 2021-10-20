@@ -9,7 +9,8 @@ Excecute the notebooks online:
 
 This can take some time if the binder environment needs to be rebuilt (navigate from the parent folder to the projects notebooks).
  
-Requirements:
+Execute the notebooks offline:
+
 For the Notebooks two different virtual environments (venv) had to be set up because PyCaret only runs with a different version of Python and scikit-learn (older ones) compared to the newer versions that were used for the rest of the project. If you don't want to run the "Modelling with Pycaret" - Notebook it's sufficient to work with only one venv and install the requirements.txt file.
 
 ## Description
@@ -84,15 +85,6 @@ Technical skills honed in this project are:
 - Pandas Data Type Optimization
 - Understanding of Pandas & NumPy internals
 - Using different flat file types with faster I/O
-
-## Requirements
-Installed modules:
-
-| Library            | Version |
-| :---               | --- |
-| sys (Python)       | 3.9.7 | 
-| pandas             | 1.3.2 |
-| seaborn            | 0.11.1 |
 
 ## Personal Learnings:
 This time the personal learnings can be summarized in a checklist for future projects:
