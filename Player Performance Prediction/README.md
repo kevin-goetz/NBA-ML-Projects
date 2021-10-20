@@ -14,7 +14,7 @@ This can take some time if the binder environment needs to be rebuilt (navigate 
  
 ### Offline
 
-For the Notebooks two different virtual environments (venv) had to be set up because PyCaret only runs with a different version of Python and scikit-learn (older ones) compared to the newer versions that were used for the rest of the project. If you don't want to run the "Modelling with Pycaret" - Notebook it's sufficient to work with only one venv and install the requirements.txt file.
+For the Notebooks two different virtual environments (venv) had to be set up because PyCaret only runs with a different version of Python and scikit-learn (older ones) compared to the newer versions that were used for the rest of the project. If you don't want to run the "Modelling with Pycaret" - Notebook it's sufficient to work with only one venv and install the **requirements.txt** file.
 
 ## Description
 
@@ -29,57 +29,12 @@ Pandas provides data structures for in-memory analytics, which makes using panda
 
 That's what this Notebook is all about: How to shrink your pandas dataframe so it fit's your RAM better - without losing any information.
 
-## Impact
-I tested the function below with the 17 Seaborn test datasets. The code for the test is in the folder ["Seaborn Test Datasets"](https://github.com/kevin-goetz/Optimizing-Pandas-Data-Types/tree/main/Seaborn%20Test%20Datasets):
+## The Machine Learning Pipeline
 
-[<img src="https://github.com/kevin-goetz/Optimizing-Pandas-Data-Types/blob/main/Seaborn%20Test%20Datasets/Seaborn%20Test%20Data%20Sets%20Downsized%20Ranking.PNG" height="400em" align="center"/>
+Here's a HTML represeantation of the ML pipeline to get an overview of the process of preparing and modelling the data:
 
-Another great plus of this project is when you safe your downsized DataFrame to **df.to_feather(path)**. All the data types are safed so you only have to do it once + it costs way less disc space + the read/write speed is much faster. 
+<html src="https://github.com/kevin-goetz/NBA-ML-Projects/blob/main/Player%20Performance%20Prediction/Models/NBA_Rookie_model_pipeline.html" align="center" height="500em" />
 
-## Copy & Try Yourself!
-
-Just copy the function definition and use it with one of your bigger dataframes: df_small = downcast(df_big).
-
-```python
-
-def downcast(df: pd.DataFrame) -> pd.DataFrame:
-    
-    ''' Compression of the common dtypes "float64", "int64", "object" or "string" '''
-
-    # memory before downcasting
-    mem_before = df.memory_usage(deep=True).sum()
-    mem_before_mb = round(mem_before / (1024**2), 2)
-
-    # convert the dataframe columns to ExtensionDtype (e.g. object to string, or 1.0 float to 1 integer, etc.)
-    df = df.convert_dtypes()
-
-    # string categorization (only the ones with low cardinality)
-    for column in df.select_dtypes(['string', 'object']):
-        if (len(df[column].unique()) / len(df[column])) < 0.5:
-            df[column] = df[column].astype('category')
-
-    # float64 downcasting
-    for column in df.select_dtypes(['float']):
-        df[column] = pd.to_numeric(df[column], downcast='float')
-
-    # int64 downcasting (depending if negative values are apparent (='signed') or only >=0 (='unsigned'))
-    for column in df.select_dtypes(['integer']):
-        if df[column].min() >= 0:
-            df[column] = pd.to_numeric(df[column], downcast='unsigned')
-        else:
-            df[column] = pd.to_numeric(df[column], downcast='signed')
-
-    # memory after downcasting & compression
-    mem_after = df.memory_usage(deep=True).sum()
-    mem_after_mb = round(mem_after / (1024**2), 2)
-    compression = round(((mem_before - mem_after) / mem_before) * 100)
-
-    # downcasting summary
-    print(f'DataFrame compressed by {compression}% from {mem_before_mb} MB down to {mem_after_mb} MB.')
-
-    return df
-    
-```
 
 ## Skills
 Technical skills honed in this project are:
